@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <Title title="web" sub="what props?"/>
       <TOC/>
-      <Subject/>
+      <Subject title="web"/>
     </div>
   );
 }
