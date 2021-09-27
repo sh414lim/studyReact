@@ -9,7 +9,7 @@ class App extends React.Component{
  constructor(props){
    super(props)
   this.state={
-    mode:"welcome",
+    mode:"read",
     subject:{title:"web" , sub:"world wid web"},
     welcome:{title:"Welcome",desc:"welcome React!!"},
     contents:[
@@ -33,6 +33,7 @@ render(){
     _title=this.state.contents[0].title;
     _desc=this.state.contents[0].desc;
   }
+  console.log("render",this)
   return (
     <div className="App"> 
       {/* <Subject 
@@ -44,12 +45,19 @@ render(){
                   // 사용자 정의함수 링크를 클릭했을때 실행 되도록 약속 되어 있다.
                   console.log(e)
                   // 이벤트의 기본동작 제어
-                  e.preventDefault()
+                  e.preventDefault();
+                  this.state.mode="welcome";  
+                  this.setState({
+                    mode:"welcome"
+                  })
                   // debugger; => 여기서 정지 후 소스코드에서 코드 확인
-                }}>
+                // 이벤트를 설치시 this 를 찾을수 없어서 에러가 발생시 bind 사용
+                // 함수가 끝난 직후에 bind(this) 추가
+                //함수 안에서 this 는 우리의 컴포넌트가 된다
+                }.bind(this)}>
                 <h2>{this.state.subject.title}</h2>
                      </a>
-                {this.props.desc}
+                {this.state.subject.sub}
             </header>
       <Title   data={this.state.contents}/>
       <TOC title={_title} desc={_desc}/>
