@@ -3,6 +3,7 @@ import React from "react";
 
 class Subject extends React.Component{
     render(){
+        console.log("subject lender")
         return(
             <header>
                 <a href="/">

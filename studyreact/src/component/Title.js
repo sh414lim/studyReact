@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 class Title extends Component{
     render(){
+        console.log("title lender")
         const lists=[];
         const data=this.props.data
         let i =0;
