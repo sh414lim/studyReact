@@ -33,6 +33,7 @@ render(){
     _title=this.state.contents[0].title;
     _desc=this.state.contents[0].desc;
   }
+  //this 는 컴포넌트 안에서 자기자신을 가리킨다
   console.log("render",this)
   return (
     <div className="App"> 
@@ -42,11 +43,16 @@ render(){
        /> */}
         <header>
                 <a href="/" onClick={function(e){
+
                   // 사용자 정의함수 링크를 클릭했을때 실행 되도록 약속 되어 있다.
                   console.log(e)
+
                   // 이벤트의 기본동작 제어
                   e.preventDefault();
-                  this.state.mode="welcome";  
+ 
+                  // this.state.mode="welcome";  
+                  
+                  /* state 값이 바뀌면 항상  */
                   this.setState({
                     mode:"welcome"
                   })
