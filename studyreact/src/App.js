@@ -2,7 +2,7 @@ import React  from "react";
 // import Subject from "./component/Subject";
 import Title from "./component/Title";
 import TOC from "./component/TOC";
-
+import Subject from "./component/Subject"
   
 class App extends React.Component{
   //state 초기화 및 초기설정
@@ -10,6 +10,7 @@ class App extends React.Component{
    super(props)
   this.state={
     mode:"read",
+    select_cotents_id:2,
     subject:{title:"web" , sub:"world wid web"},
     welcome:{title:"Welcome",desc:"welcome React!!"},
     contents:[
@@ -30,6 +31,17 @@ render(){
     _title=this.state.welcome.title;
     _desc=this.state.welcome.desc;
   }else if(this.state.mode === "read"){
+    let i = 0;
+    while(i<this.state.contents.length){
+      let data = this.state.contents[i]
+      if(data.id === this.state.select_cotents_id){
+        _title=data.title;
+        _desc=data.desc;
+        break;
+      }
+      i= i+1;
+
+    }
     _title=this.state.contents[0].title;
     _desc=this.state.contents[0].desc;
   }
@@ -37,35 +49,22 @@ render(){
   console.log("render",this)
   return (
     <div className="App"> 
-      {/* <Subject 
+      <Subject 
       title={this.state.subject.title}
       sub={this.state.subject.sub}
-       /> */}
-        <header>
-                <a href="/" onClick={function(e){
-
-                  // 사용자 정의함수 링크를 클릭했을때 실행 되도록 약속 되어 있다.
-                  console.log(e)
-
-                  // 이벤트의 기본동작 제어
-                  e.preventDefault();
- 
-                  // this.state.mode="welcome";  
-                  
-                  /* state 값이 바뀌면 항상  */
-                  this.setState({
-                    mode:"welcome"
-                  })
-                  // debugger; => 여기서 정지 후 소스코드에서 코드 확인
-                // 이벤트를 설치시 this 를 찾을수 없어서 에러가 발생시 bind 사용
-                // 함수가 끝난 직후에 bind(this) 추가
-                //함수 안에서 this 는 우리의 컴포넌트가 된다
-                }.bind(this)}>
-                <h2>{this.state.subject.title}</h2>
-                     </a>
-                {this.state.subject.sub}
-            </header>
-      <Title   data={this.state.contents}/>
+      onChangePage={function(e){
+      this.setState({
+        mode:"welcome"
+      })
+      }.bind(this)}
+       />
+        
+         
+      <Title onChangePage={function(e){
+        this.setState({
+          mode:"read"
+        })
+      }.bind(this)} data={this.state.contents}/>
       <TOC title={_title} desc={_desc}/>
     </div>
   );
